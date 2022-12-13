@@ -3,45 +3,64 @@
 
 function typeVariant(input) {
     const result = typeof input;
-    return result;
+    console.log(result);
 }
 
-const typeString = typeVariant("Dejan");
-console.log(typeString);
-
-const typeNumber = typeVariant(26);
-console.log(typeNumber);
-
-const typeBoolean = typeVariant(20>15);
-console.log(typeBoolean);
-
-const typeObject = typeVariant(null);
-console.log(typeObject);
-
-const typeUndefined = typeVariant();
-console.log(typeUndefined);
-
+typeVariant(null);
+typeVariant(true);
+typeVariant(10);
+typeVariant('Dejan');
+typeVariant();
 
 // Excercise 2
 
-function calculateAge(ageHuman,ageDog) {
-    const ageInDogYears = ageHuman * 7;
-    return ageInDogYears;
+function calculateAge(age,conversionType) {
+    if (Number.isNaN(age)){
+        return 'Invalid input'
+    }
+    if (conversionType !== "h2d" && conversionType !== "d2h") {
+        return 'Invalid input'
+    }
+    if (conversionType === "h2d") {
+        const result = age * 7;
+        console.log(result);
+       // return result; 
+    } else {
+        const result = age / 7;
+        console.log(result);
+       // return result;
+    }
 }
 
-const dogYears = calculateAge(3);
-console.log(dogYears);
+const convertedAge = calculateAge(15,'h2d');
 
-//unfinished
+//Прво ја решив со prompt, ама приметив дека се бара со console, па еве ја на двата начина (:
+
+//const ageInput = Number(prompt("Please enter age:"));
+//const conversionTypeInput = prompt("Enter H2D or D2H").toLowerCase();
+
+//const convertedAge = calculateAge(ageInput, conversionTypeInput);
+//console.log(convertedAge);
+
 
 //Excercise 3
 
-function atm(balance,withdrawal) {
-    if (withdrawal>balance) {
-        return 'Not enough funds'
+function atm(balance,withdrawl) {
+    if (Number.isNaN(balance)) {
+        return 'Invalid input';
     }
-     const moneyLeft = balance - withdrawal;
-     return `You withdrew ${withdrawal}$, and now your balance is ${moneyLeft}$.`
+    if (Number.isNaN(withdrawl)) {
+        return 'Invalid input';
+    }
+    if (balance < withdrawl) {
+        return 'Not enough money.';
+    }
+    const result = balance - withdrawl;
+    return result;
 }
-const bankAccount = atm (1650,650);
-console.log(bankAccount);
+
+const balanceInpuit = Number(prompt("Enter your balance:"));
+const withdrawlInput = Number(prompt("Enter the ammount of money you would like to withdraw:"));
+
+const moneyRemaining = atm (balanceInpuit,withdrawlInput);
+console.log(`You have withdrawn ${withdrawlInput}$ from your account, and now you have ${moneyRemaining}$ left on your account.`);
